@@ -10,6 +10,8 @@ Clonez le repo sur votre machine. Vous pouvez répondre aux questions en modifia
 
 **Le rendu consiste simplement à répondre à toutes les questions clairement identifiées dans le text avec la mention "Question" et à les accompagner avec des captures. Le rendu doit se faire par une "pull request". Envoyer également le hash du dernier commit et votre username GitHub par email au professeur et à l'assistant**
 
+**N'oubliez pas de spécifier les noms des membres du groupes dans la Pull Request ainsi que dans le mail de rendu !!!**
+
 
 ## Echéance 
 
@@ -35,6 +37,11 @@ Dans ce travail de laboratoire, vous allez configurer des routeurs Cisco émulé
 La manière la plus simple de faire ce laboratoire est dans les machines des salles de labo. Le logiciel d'émulation c'est eve-ng. Vous trouverez un [guide très condensé](files/Fonctionnement_EVE-NG.pdf) pour l'utilisation de eve-ng ici.
 
 Vous pouvez faire fonctionner ce labo sur vos propres machines à condition de copier la VM eve-ng et d'utiliser Windows (c'est possible de le faire fonctionner sur d'autres systèmes mais ça nécessite un effort qui ne vaut pas la peine...).
+
+tuto d'install de la VM eve-ng : https://www.eve-ng.net/index.php/documentation/installation/virtual-machine-install/
+Vous pouvez, au choix, configurer en static ou en dhcp. Assurez vous d'avoir mis la VM en mode "Bridge".
+Ensuite, terminez la configuration de la VM, connectez vous et récupérez l'adresse ip de la machine virtuelle.
+Utilisez un navigateur internet (hors VM) et tapez l'adresse IP de la VM.
 
 
 ## Fichiers nécessaires 
