@@ -38,8 +38,13 @@ La manière la plus simple de faire ce laboratoire est dans les machines des sal
 
 Vous pouvez faire fonctionner ce labo sur vos propres machines à condition de copier la VM eve-ng et d'utiliser Windows (c'est possible de le faire fonctionner sur d'autres systèmes mais ça nécessite un effort qui ne vaut pas la peine...).
 
-tuto d'install de la VM eve-ng : https://www.eve-ng.net/index.php/documentation/installation/virtual-machine-install/
-Vous pouvez, au choix, configurer en static ou en dhcp. Assurez vous d'avoir mis la VM en mode "Bridge".
+**tuto d'installation** de la VM eve-ng : https://www.eve-ng.net/index.php/documentation/installation/virtual-machine-install/
+
+**Récupération de la VM pré-configurée** : vous la trouverez sur \\eistore1\cours\iict\SRX\LaboVPn
+
+Je vous conseille de passer la VM en mode "Bridge".
+Les user-password en mode terminal sont : "root" | "eve"
+Les user-password en mode navigateur sont : "admin" | "eve"
 Ensuite, terminez la configuration de la VM, connectez vous et récupérez l'adresse ip de la machine virtuelle.
 Utilisez un navigateur internet (hors VM) et tapez l'adresse IP de la VM.
 
