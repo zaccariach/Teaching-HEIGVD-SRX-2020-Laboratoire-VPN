@@ -15,7 +15,7 @@ Clonez le repo sur votre machine. Vous pouvez répondre aux questions en modifia
 
 ## Echéance 
 
-Ce travail devra être rendu le dimanche après la fin de la 2ème séance de laboratoire, soit au plus tard, **le 09 juin 2019, à 23h.**
+Ce travail devra être rendu le dimanche après la fin de la 2ème séance de laboratoire, soit au plus tard, **le 11 mai 2020, à 23h59.**
 
 
 ## Introduction
