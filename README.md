@@ -43,9 +43,13 @@ Vous pouvez faire fonctionner ce labo sur vos propres machines à condition de c
 **Récupération de la VM pré-configurée** (vous ne pouvez pas utiliser la versión qui se trouve sur le site de eve-ng) : vous la trouverez sur \\eistore1\cours\iict\SRX\LaboVPn
 
 Il est conseillé de passer la VM en mode "Bridge" si vous avez des problèmes. Le mode NAT **devrait** aussi fonctionner.
+
 Les user-password en mode terminal sont : "root" | "eve"
+
 Les user-password en mode navigateur sont : "admin" | "eve"
+
 Ensuite, terminez la configuration de la VM, connectez vous et récupérez l'adresse ip de la machine virtuelle.
+
 Utilisez un navigateur internet (hors VM) et tapez l'adresse IP de la VM.
 
 
