@@ -30,8 +30,8 @@ Dans ce travail de laboratoire, vous allez configurer des routeurs Cisco émulé
 -	Capture Sniffer avec filtres précis sur la communication à épier
 -	Activation du mode « debug » pour certaines fonctions du routeur
 -	Observation des protocoles IPSec
- 
- 
+
+
 ## Matériel
 
 La manière la plus simple de faire ce laboratoire est dans les machines des salles de labo. Le logiciel d'émulation c'est eve-ng. Vous trouverez un [guide très condensé](files/Fonctionnement_EVE-NG.pdf) pour l'utilisation de eve-ng ici.
@@ -108,7 +108,11 @@ Un « protocol » différent de `up` indique la plupart du temps que l’interfa
 
 ---
 
-**Réponse :**  
+**Réponse :**  Aucun problème n'a été rencontré lors de l'importation de la configuration de base. Toutes les adresses sont justes, et ce sur les bonnes interfaces.
+
+![question1_R1](images/question1_R1.PNG)
+
+![question1_R2](images/question1_R2.PNG)
 
 ---
 
@@ -145,7 +149,27 @@ Pour votre topologie il est utile de contrôler la connectivité entre :
 
 ---
 
-**Réponse :**  
+**Réponse :**  Tous les pings ont passé sans problème.
+
+*Ping entre R1 et son ISP*
+
+![question2_ping_R2_ISP](images/question2_ping_R2_ISP.PNG)
+
+​*Ping entre R2 et son ISP*
+
+![question2_ping_R2_R1_via_ISP](images/question2_ping_R2_R1_via_ISP.PNG)
+
+​*Ping entre R1 et R2 via leur ISP*
+
+![question2_ping_R1_R2_via_ISP](images/question2_ping_R1_R2_via_ISP.PNG)
+
+​*Ping entre R2 et R1 via leur ISP*
+
+![question2_ping_R2_PC](images/question2_ping_R2_R1_via_ISP.PNG)
+
+​*Ping entre R2 et le PC*
+
+![question2_ping_R2_PC](images/question2_R2_PC.PNG)
 
 ---
 
@@ -169,6 +193,14 @@ Pour déclencher et pratiquer les captures vous allez « pinger » votre routeur
 ---
 
 **Screenshots :**  
+
+​*Debug du routeur R1*
+
+![](images/question3_R1_debug.png)
+
+*Capture Wireshark*
+
+![](images/question3_wireshark.png)
 
 ---
 
@@ -240,6 +272,10 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 ---
 
 **Réponse :**  
+R1
+![R1 show](images/question4_r1.png)
+R2
+![R2 show](images/question4_r2.png)
 
 ---
 
@@ -249,6 +285,10 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 ---
 
 **Réponse :**  
+R1
+![R1 show](images/question5_r1.png)
+R2
+![R2 show](images/question5_r2.png)
 
 ---
 
@@ -342,6 +382,13 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 ---
 
 **Réponse :**  
+Capture Wireshark
+![Capture Wireshark, eth0/0 de R2](images/question6_wireshark.png)
+R1 en mode debug
+![Debug de R1](images/question6_R1_debug.png)
+
+On voit dans la capture Wireshark que la phase 1 de notre IKE a lieu avec le mode principal (Main Mode) et l'échange des 6 messages. La phase 2 a lieu avec le mode rapide (Quick Mode).  
+Enfin, nos pings ICMP sont envoyés via notre connexion IPSec avec une encapsulation de ces données (ESP).
 
 ---
 
@@ -350,6 +397,15 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 ---
 
 **Réponse :**  
+IKE  
+- lifetime = temps de validité de la SA de la phase 1  
+- keepalive = temps entre chaque paquet DPD qui permettent de vérifier que les stations qui sont reliés par le tunnel soient toujours actives
+
+IPSec   
+- security-association lifetime seconds = temps avant que la SA de la phase 2 n'expire  
+- security-association lifetime kilobytes = volume de traffic qui peut passer entre les pairs avant que la SA n'expire  
+- security-association idle-time = temps qu'un pair peut être inactif et maintenir la SA de phase 2
+
 
 ---
 
@@ -364,15 +420,19 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 ---
 
 **Réponse :**  
+IPSec  
+IKE  
+ESP  
 
 ---
-
 
 **Question 9: Expliquez si c’est un mode tunnel ou transport.**
 
 ---
-
+       
 **Réponse :**  
+Mode tunnel hôte-à-hôte  
+
 
 ---
 
