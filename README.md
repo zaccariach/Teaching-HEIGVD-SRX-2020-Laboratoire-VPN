@@ -275,7 +275,9 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 R1
 ![R1 show](images/question4_r1.png)
 R2
-![R2 show](images/question4_r2.png)
+![R2 show](images/question4_r2.png)  
+
+On peut voir que le routeur R2 a deux configurations pour son IKE tandis que R1 n'en a qu'une. Cela permet de mettre en place plusieurs "types" d'IKE et ainsi utiliser plusieurs VPN en parallèle ou selon certaines situations.  
 
 ---
 
@@ -288,7 +290,9 @@ R2
 R1
 ![R1 show](images/question5_r1.png)
 R2
-![R2 show](images/question5_r2.png)
+![R2 show](images/question5_r2.png)  
+
+Nos deux routeurs utilisent une même clé partagée (ici "cisco-1").   
 
 ---
 
@@ -326,17 +330,17 @@ crypto map MY-CRYPTO 10 ipsec-isakmp
 Les commandes de configurations sur R2 ressembleront à ce qui suit :
 
 ```
-crypto ipsec security-association lifetime kilobytes 2560
-crypto ipsec security-association lifetime seconds 300
-crypto ipsec transform-set STRONG esp-aes 192 esp-sha-hmac 
-  mode tunnel
-  ip access-list extended TO-CRYPT
-  permit ip 172.17.1.0 0.0.0.255 172.16.1.0 0.0.0.255
-crypto map MY-CRYPTO 10 ipsec-isakmp 
-  set peer 193.100.100.1
-  set security-association idle-time 900
-  set transform-set STRONG 
-  match address TO-CRYPT
+crypto ipsec security-association lifetime kilobytes 2560  
+crypto ipsec security-association lifetime seconds 300  
+crypto ipsec transform-set STRONG esp-aes 192 esp-sha-hmac  
+  mode tunnel  
+  ip access-list extended TO-CRYPT  
+  permit ip 172.17.1.0 0.0.0.255 172.16.1.0 0.0.0.255  
+crypto map MY-CRYPTO 10 ipsec-isakmp  
+  set peer 193.100.100.1  
+  set security-association idle-time 900  
+  set transform-set STRONG  
+  match address TO-CRYPT  
 ```
 
 Vous pouvez contrôler votre configuration IPsec avec les commandes suivantes :
@@ -382,12 +386,13 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 ---
 
 **Réponse :**  
-Capture Wireshark
-![Capture Wireshark, eth0/0 de R2](images/question6_wireshark.png)
-R1 en mode debug
-![Debug de R1](images/question6_R1_debug.png)
+Capture Wireshark  
+![Capture Wireshark, eth0/0 de R2](images/question6_wireshark.png)  
+R1 en mode debug  
+![Debug de R1](images/question6_R1_debug.png)  
 
 On voit dans la capture Wireshark que la phase 1 de notre IKE a lieu avec le mode principal (Main Mode) et l'échange des 6 messages. La phase 2 a lieu avec le mode rapide (Quick Mode).  
+
 Enfin, nos pings ICMP sont envoyés via notre connexion IPSec avec une encapsulation de ces données (ESP).
 
 ---
@@ -420,9 +425,33 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 ---
 
 **Réponse :**  
-IPSec  
-IKE  
-ESP  
+IKE/ISAKMP - Nous avons mis en place le protocole IKE (ISAKMP) dans nos routeurs. On le sait grâce aux paquets capturés sur Wireshark qui sont aux nombres de 6 en mode principal et de 3 en mode agressif.  
+
+![Protocole IKE](images/question8_wireshark_isakmp.png)  
+
+De plus, sur la page officielle de Cisco concernant ISAKMP, on voit bien que ISAKMP est utilisé par IKEv2 pour la création de la SA.  
+
+![Page Ciscio ISAKMP/IKE](images/question8_cisco_isakmp.png)  
+
+On peut aussi le confirmer via la théorie donnée sur les VPN  
+
+![Théorie de IKE - Phase 1 (mode principal)](images/question8_theorie_1.png)  
+
+![Théorie de IKE - Phase 1 (mode agressif)](images/question8_theorie_2.png)  
+
+ESP - Le protocole d'ESP est utilisé pour le chiffrement de nos données échangées. On peut le voir premièrement par les configurations des routeurs.  
+
+![](images/question8_R1_conf.png)  
+
+![](images/question8_R2_conf.png)  
+
+Cette configuration de l'ESP se retrouve dans la documentation officielle de Cisco.  
+
+![](images/question8_ESP_Cisco.png)
+
+De plus, dans notre capture Wireshark, on voit l'échange des paquets ICMP (ping) entre la station du routeur R2 et l'adresse Localhost du routeur R1 qui sont encapsulés par le protocole ESP.  
+
+![](images/question8_wireshark_esp.png)  
 
 ---
 
@@ -431,8 +460,13 @@ ESP
 ---
        
 **Réponse :**  
-Mode tunnel hôte-à-hôte  
+Selon la configuration des routeurs R1 et R2, nous utilisons le mode tunnel.  
 
+Config R1  
+![](images/question9_R1_conf.png)  
+
+Config R2  
+![](images/question9_R2_conf.png)  
 
 ---
 
@@ -443,6 +477,18 @@ Mode tunnel hôte-à-hôte
 
 **Réponse :**  
 
+Comme vue en théorie, la partie du paquet qui est chiffré est le paquet IP original ainsi que l'en-queue "ESP trailer" (vu que ESP est utilisé pour l'IPSec).  
+
+![](images/question1011_theorie.png)
+
+Pour le chiffrement, nous utilisons l'algorithme AES avec une clé 192 bits.  
+
+![](images/question10_R1_conf.png)  
+
+![](images/question10_ESP_Cisco.png)  
+
+![](images/question10_Cisco.png)  
+
 ---
 
 
@@ -452,6 +498,18 @@ Mode tunnel hôte-à-hôte
 
 **Réponse :**  
 
+Comme vue en théorie, la partie du paquet qui est authentifié est le paquet IP original ainsi que l'en-queue "ESP trailer" et l'en-tête ESP.  
+
+![](images/question1011_theorie.png)  
+
+Pour l'authentification, nous utilisons une clé partagée, qui utilise SHA1 et HMAC-160.  
+
+![](images/question11_R1_conf.png)  
+
+![](images/question11_ESP_Cisco.png)  
+
+![](images/question11_Cisco.png)  
+
 ---
 
 
@@ -460,5 +518,15 @@ Mode tunnel hôte-à-hôte
 ---
 
 **Réponse :**  
+
+Pour l'intégrité du paquet, la même partie du paquet que pour son authentification est protégée. Un nouveau segment est ajouté au paquet: ESP auth.  
+
+![](images/question1011_theorie.png) 
+
+Pour garantir cette intégrité, nous utilisons l'algorithme SHA1 et HMAC-160. 
+
+![](images/question11_R1_conf.png)
+
+![](images/question12_Cisco.png)
 
 ---
