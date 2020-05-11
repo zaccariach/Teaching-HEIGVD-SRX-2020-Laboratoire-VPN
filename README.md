@@ -291,6 +291,7 @@ On peut voir que le routeur R2 a deux configurations pour son IKE tandis que R1 
 **Réponse :**  
 R1
 ![R1 show](images/question5_r1.PNG)
+
 R2
 ![R2 show](images/question5_r2.PNG)  
 
