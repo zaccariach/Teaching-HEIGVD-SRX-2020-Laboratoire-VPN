@@ -275,6 +275,7 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 **Réponse :**  
 R1
 ![R1 show](images/question4_r1.PNG)
+
 R2
 ![R2 show](images/question4_r2.PNG)  
 
