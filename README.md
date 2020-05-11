@@ -1,4 +1,5 @@
 # Teaching-HEIGVD-SRX-2020-Laboratoire-VPN
+# Auteurs Michaël Da Silva, Christian Zaccaria
 
 **Ce travail de laboratoire est à faire en équipes de 3 personnes**
 
@@ -196,11 +197,11 @@ Pour déclencher et pratiquer les captures vous allez « pinger » votre routeur
 
 ​*Debug du routeur R1*
 
-![](images/question3_R1_debug.png)
+![question3_R1_debug](images/question3_R1_debug.PNG)
 
 *Capture Wireshark*
 
-![](images/question3_wireshark.png)
+![question3_wireshark](images/question3_wireshark.PNG)
 
 ---
 
@@ -273,9 +274,9 @@ Vous pouvez consulter l’état de votre configuration IKE avec les commandes su
 
 **Réponse :**  
 R1
-![R1 show](images/question4_r1.png)
+![R1 show](images/question4_r1.PNG)
 R2
-![R2 show](images/question4_r2.png)  
+![R2 show](images/question4_r2.PNG)  
 
 On peut voir que le routeur R2 a deux configurations pour son IKE tandis que R1 n'en a qu'une. Cela permet de mettre en place plusieurs "types" d'IKE et ainsi utiliser plusieurs VPN en parallèle ou selon certaines situations.  
 
@@ -288,9 +289,9 @@ On peut voir que le routeur R2 a deux configurations pour son IKE tandis que R1 
 
 **Réponse :**  
 R1
-![R1 show](images/question5_r1.png)
+![R1 show](images/question5_r1.PNG)
 R2
-![R2 show](images/question5_r2.png)  
+![R2 show](images/question5_r2.PNG)  
 
 Nos deux routeurs utilisent une même clé partagée (ici "cisco-1").   
 
@@ -387,9 +388,9 @@ Pensez à démarrer votre sniffer sur la sortie du routeur R2 vers internet avan
 
 **Réponse :**  
 Capture Wireshark  
-![Capture Wireshark, eth0/0 de R2](images/question6_wireshark.png)  
+![Capture Wireshark, eth0/0 de R2](images/question6_wireshark.PNG)  
 R1 en mode debug  
-![Debug de R1](images/question6_R1_debug.png)  
+![Debug de R1](images/question6_R1_debug.PNG)  
 
 On voit dans la capture Wireshark que la phase 1 de notre IKE a lieu avec le mode principal (Main Mode) et l'échange des 6 messages. La phase 2 a lieu avec le mode rapide (Quick Mode).  
 
@@ -427,31 +428,31 @@ En vous appuyant sur les notions vues en cours et vos observations en laboratoir
 **Réponse :**  
 IKE/ISAKMP - Nous avons mis en place le protocole IKE (ISAKMP) dans nos routeurs. On le sait grâce aux paquets capturés sur Wireshark qui sont aux nombres de 6 en mode principal et de 3 en mode agressif.  
 
-![Protocole IKE](images/question8_wireshark_isakmp.png)  
+![Protocole IKE](images/question8_wireshark_isakmp.PNG)  
 
 De plus, sur la page officielle de Cisco concernant ISAKMP, on voit bien que ISAKMP est utilisé par IKEv2 pour la création de la SA.  
 
-![Page Ciscio ISAKMP/IKE](images/question8_cisco_isakmp.png)  
+![Page Ciscio ISAKMP/IKE](images/question8_cisco_isakmp.PNG)  
 
 On peut aussi le confirmer via la théorie donnée sur les VPN  
 
-![Théorie de IKE - Phase 1 (mode principal)](images/question8_theorie_1.png)  
+![Théorie de IKE - Phase 1 (mode principal)](images/question8_theorie_1.PNG)  
 
-![Théorie de IKE - Phase 1 (mode agressif)](images/question8_theorie_2.png)  
+![Théorie de IKE - Phase 1 (mode agressif)](images/question8_theorie_2.PNG)  
 
 ESP - Le protocole d'ESP est utilisé pour le chiffrement de nos données échangées. On peut le voir premièrement par les configurations des routeurs.  
 
-![](images/question8_R1_conf.png)  
+![question8_R1_conf](images/question8_R1_conf.PNG)  
 
-![](images/question8_R2_conf.png)  
+![question8_R2_conf](images/question8_R2_conf.PNG)  
 
 Cette configuration de l'ESP se retrouve dans la documentation officielle de Cisco.  
 
-![](images/question8_ESP_Cisco.png)
+![question8_ESP_Cisco](images/question8_ESP_Cisco.PNG)
 
 De plus, dans notre capture Wireshark, on voit l'échange des paquets ICMP (ping) entre la station du routeur R2 et l'adresse Localhost du routeur R1 qui sont encapsulés par le protocole ESP.  
 
-![](images/question8_wireshark_esp.png)  
+![question8_wireshark_esp](images/question8_wireshark_esp.PNG)  
 
 ---
 
@@ -463,10 +464,10 @@ De plus, dans notre capture Wireshark, on voit l'échange des paquets ICMP (ping
 Selon la configuration des routeurs R1 et R2, nous utilisons le mode tunnel.  
 
 Config R1  
-![](images/question9_R1_conf.png)  
+![question9_R1_conf](images/question9_R1_conf.PNG)  
 
 Config R2  
-![](images/question9_R2_conf.png)  
+![question9_R2_conf](images/question9_R2_conf.PNG)  
 
 ---
 
@@ -479,15 +480,15 @@ Config R2
 
 Comme vue en théorie, la partie du paquet qui est chiffré est le paquet IP original ainsi que l'en-queue "ESP trailer" (vu que ESP est utilisé pour l'IPSec).  
 
-![](images/question1011_theorie.png)
+![](images/question1011_theorie.PNG)
 
 Pour le chiffrement, nous utilisons l'algorithme AES avec une clé 192 bits.  
 
-![](images/question10_R1_conf.png)  
+![question10_R1_conf](images/question10_R1_conf.PNG)  
 
-![](images/question10_ESP_Cisco.png)  
+![question10_ESP_Cisco](images/question10_ESP_Cisco.PNG)  
 
-![](images/question10_Cisco.png)  
+![question10_Cisco](images/question10_Cisco.PNG)  
 
 ---
 
@@ -500,15 +501,15 @@ Pour le chiffrement, nous utilisons l'algorithme AES avec une clé 192 bits.
 
 Comme vue en théorie, la partie du paquet qui est authentifié est le paquet IP original ainsi que l'en-queue "ESP trailer" et l'en-tête ESP.  
 
-![](images/question1011_theorie.png)  
+![question1011_theorie](images/question1011_theorie.PNG)  
 
 Pour l'authentification, nous utilisons une clé partagée, qui utilise SHA1 et HMAC-160.  
 
-![](images/question11_R1_conf.png)  
+![question11_R1_conf](images/question11_R1_conf.PNG)  
 
-![](images/question11_ESP_Cisco.png)  
+![question11_ESP_Cisco](images/question11_ESP_Cisco.PNG)  
 
-![](images/question11_Cisco.png)  
+![question11_Cisco](images/question11_Cisco.PNG)  
 
 ---
 
@@ -521,12 +522,12 @@ Pour l'authentification, nous utilisons une clé partagée, qui utilise SHA1 et 
 
 Pour l'intégrité du paquet, la même partie du paquet que pour son authentification est protégée. Un nouveau segment est ajouté au paquet: ESP auth.  
 
-![](images/question1011_theorie.png) 
+![question1011_theorie](images/question1011_theorie.PNG) 
 
 Pour garantir cette intégrité, nous utilisons l'algorithme SHA1 et HMAC-160. 
 
-![](images/question11_R1_conf.png)
+![question11_R1_conf](images/question11_R1_conf.PNG)
 
-![](images/question12_Cisco.png)
+![question12_Cisco](images/question12_Cisco.PNG)
 
 ---
